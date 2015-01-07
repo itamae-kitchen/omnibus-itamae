@@ -1,7 +1,6 @@
 GIT
-  remote: git://github.com/ryotarai/omnibus-software.git
-  revision: 7cc8735ba2ada9920e45731d6b4df91dcace7bb5
-  branch: gnu-mirror
+  remote: git://github.com/opscode/omnibus-software.git
+  revision: e84914afce6feb98edcb718cf27fd9a2467e9187
   specs:
     omnibus-software (4.0.0)
 
