@@ -1,0 +1,7 @@
+box: wercker-labs/docker
+build:
+  steps:
+    - script:
+        name: build on ubuntu 14.04
+        code: scripts/build_with_docker_ubuntu_14.04.sh
+
