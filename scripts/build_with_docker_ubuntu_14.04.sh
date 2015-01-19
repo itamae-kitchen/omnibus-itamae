@@ -5,7 +5,7 @@ DIR=$(dirname $(cd $(dirname $0); pwd))
 
 docker run -v $DIR:/app ubuntu:14.04 /bin/bash -ex -c \
 'apt-get update
-apt-get install -y software-properties-common git-core build-essential
+apt-get install -y software-properties-common git-core build-essential autoconf
 apt-add-repository -y ppa:brightbox/ruby-ng
 apt-get update
 apt-get install -y ruby2.2 ruby2.2-dev
