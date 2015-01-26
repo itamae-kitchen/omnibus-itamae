@@ -1,8 +1,6 @@
 name 'Itamae'
 maintainer 'Ryota Arai'
 homepage 'https://github.com/ryotarai/itamae' 
-vendor 'Ryota Arai <ryota.arai@gmail.com>'
-license 'MIT'
 
 install_dir '/opt/itamae'
 build_version do
@@ -22,3 +20,8 @@ dependency 'version-manifest'
 
 exclude '\.git*'
 exclude 'bundler\/git'
+
+package :deb do
+  license 'MIT'
+  vendor 'Ryota Arai <ryota.arai@gmail.com>'
+end
