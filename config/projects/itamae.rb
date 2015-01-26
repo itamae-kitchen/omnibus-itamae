@@ -1,6 +1,8 @@
-name 'itamae'
-maintainer 'ryotarai'
+name 'Itamae'
+maintainer 'Ryota Arai'
 homepage 'https://github.com/ryotarai/itamae' 
+vendor 'Ryota Arai <ryota.arai@gmail.com>'
+license 'MIT'
 
 install_dir '/opt/itamae'
 build_version do
