@@ -14,4 +14,6 @@ function error_exit
 
 echo "Thank you for installing itamae!"
 
+ln -fs /opt/itamae/embedded/bin/itamae /usr/local/bin/itamae
+
 exit 0

@@ -10,5 +10,4 @@ env = {
 
 build do
   gem "install itamae --no-ri --no-rdoc -v #{version}", env: env
-  command "sudo ln -fs #{install_dir}/embedded/bin/itamae /usr/local/bin/itamae", env: env
 end
