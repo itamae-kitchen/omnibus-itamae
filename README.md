@@ -1,5 +1,8 @@
 itamae Omnibus project
 ======================
+
+[![wercker status](https://app.wercker.com/status/b946c3abad2c4bf80178a593f269c25d/s/master "wercker status")](https://app.wercker.com/project/bykey/b946c3abad2c4bf80178a593f269c25d)
+
 This project creates full-stack platform-specific packages for
 `itamae`!
 
