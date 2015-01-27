@@ -24,4 +24,6 @@ exclude 'bundler\/git'
 package :deb do
   license 'MIT'
   vendor 'Ryota Arai <ryota.arai@gmail.com>'
+
+  write_scripts
 end
