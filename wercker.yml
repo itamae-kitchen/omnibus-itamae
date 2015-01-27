@@ -3,10 +3,16 @@ build:
   steps:
     - script:
         name: build on ubuntu 14.04
-        code: scripts/build_with_docker_ubuntu_14.04.sh
-deploy:
-  steps:
+        code: scripts/build.sh trusty
     - script:
-        name: upload
-        code: scripts/upload_to_packagecloud.sh
+        name: build on centos 6
+        code: scripts/build.sh centos6
+    - script:
+        name: build on centos 7
+        code: scripts/build.sh centos7
+#deploy:
+#  steps:
+#    - script:
+#        name: upload
+#        code: scripts/upload_to_packagecloud.sh
 
