@@ -1,6 +1,7 @@
 GIT
-  remote: git://github.com/opscode/omnibus-software.git
-  revision: e84914afce6feb98edcb718cf27fd9a2467e9187
+  remote: git://github.com/ryotarai/omnibus-software.git
+  revision: 41d762c10127ff8834b03a835971768a10d6619b
+  branch: update-cacerts
   specs:
     omnibus-software (4.0.0)
 
