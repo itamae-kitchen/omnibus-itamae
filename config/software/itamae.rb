@@ -1,5 +1,5 @@
 name "itamae"
-default_version "1.1.22"
+default_version "1.1.23"
 
 dependency "ruby"
 dependency "rubygems"
