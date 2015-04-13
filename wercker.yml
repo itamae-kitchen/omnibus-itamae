@@ -1,9 +1,15 @@
-box: wercker-labs/docker
+box: ryotarai/omnibus:trusty
 build:
   steps:
     - script:
-        name: build on ubuntu 14.04
-        code: scripts/build_with_docker_ubuntu_14.04.sh
+        name: git config
+        code: git config --global user.email "ryota.arai+itamae@gmail.com" && git config --global user.name "Itamae Builder"
+    - script:
+        name: bundle install
+        code: bundle install -j4
+    - script:
+        name: build
+        code: bundle exec omnibus build itamae
 deploy:
   steps:
     - script:
