@@ -13,6 +13,9 @@ build:
 deploy:
   steps:
     - script:
+        name: install curl
+        code: apt-get -y install curl
+    - script:
         name: upload
         code: scripts/upload_to_packagecloud.sh
 
