@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 gem 'berkshelf', '~> 3.0'
 
 # Install omnibus software
-gem 'omnibus', '~> 4.0.0'
+#gem 'omnibus', '~> 4.0.0'
+gem 'omnibus', github: 'chef/omnibus'
 
 # Use Chef's software definitions. It is recommended that you write your own
 # software definitions, but you can clone/fork Chef's to get you started.
