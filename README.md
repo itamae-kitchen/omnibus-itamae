@@ -6,6 +6,18 @@ itamae Omnibus project
 This project creates full-stack platform-specific packages for
 `itamae`!
 
+Pre-built Packages
+------------------
+
+Supported distributions:
+
+- Ubuntu 14.04
+- (If you would like to use other distributions, please build omnibus-itamae manually by the following steps.)
+
+How to install:
+
+https://packagecloud.io/ryotarai/itamae/install
+
 Installation
 ------------
 You must have a sane Ruby 1.9+ environment with Bundler installed. Ensure all
