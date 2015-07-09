@@ -6,7 +6,7 @@ install_dir '/opt/itamae'
 build_version do
   source :version, from_dependency: 'itamae'
 end
-build_iteration 3
+# build_iteration 1
 
 # creates required build directories
 dependency "preparation"
