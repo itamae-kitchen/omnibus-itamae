@@ -4,6 +4,4 @@ ADD Gemfile /tmp/Gemfile
 ADD Gemfile.lock /tmp/Gemfile.lock
 WORKDIR /tmp
 RUN bundle install -j4
-ADD . /work
-WORKDIR /work
-RUN bundle exec omnibus build itamae
+RUN apt-get update && apt-get install -y reprepro

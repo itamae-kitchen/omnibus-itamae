@@ -1,10 +1,8 @@
 #!/bin/bash
 WORKDIR="$(cd $(dirname $(dirname $0)); pwd)"
+cd $WORKDIR
 
-docker run -v $WORKDIR:/work -it $1 /bin/bash -ec '
-cd /work
-git config --global user.email "ryota.arai+itamae@gmail.com" && git config --global user.name "Itamae Builder"
-bundle install -j4
-bundle update
-bundle exec omnibus build itamae
-'
+for dist in trusty; do
+    docker build -t omnibus-itamae-builder:$dist -f dockerfiles/$dist .
+    docker run -v $(pwd):/work -it omnibus-itamae-builder:$dist /bin/bash -c "cd /work && bundle exec omnibus build itamae && cd deb && reprepro includedeb trusty ../pkg/*.deb"
+done
