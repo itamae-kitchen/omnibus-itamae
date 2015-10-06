@@ -11,6 +11,6 @@ vendor/cookbooks
 /Gemfile.lock
 /_*
 /tmp
-/deb/db
-/deb/dists
-/deb/pool
+/static/deb/db
+/static/deb/dists
+/static/deb/pool
