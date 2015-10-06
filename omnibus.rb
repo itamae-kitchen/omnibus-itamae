@@ -1,5 +1,7 @@
 Encoding.default_external = Encoding::UTF_8
 
+append_timestamp false
+
 #
 # This file is used to configure the itamae project. It contains
 # some minimal configuration examples for working with Omnibus. For a full list

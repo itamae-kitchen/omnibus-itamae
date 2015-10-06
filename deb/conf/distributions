@@ -1,3 +1,4 @@
 Codename: trusty
 Architectures: amd64
 Components: contrib
+SignWith: E6506E2E

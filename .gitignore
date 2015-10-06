@@ -10,3 +10,7 @@ files/**/cache/
 vendor/cookbooks
 /Gemfile.lock
 /_*
+/tmp
+/deb/db
+/deb/dists
+/deb/pool

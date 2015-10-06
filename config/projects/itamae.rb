@@ -1,4 +1,4 @@
-name 'Itamae'
+name 'itamae'
 maintainer 'Ryota Arai'
 homepage 'https://github.com/ryotarai/itamae' 
 
@@ -26,3 +26,5 @@ package :deb do
   license 'MIT'
   vendor 'Ryota Arai <ryota.arai@gmail.com>'
 end
+
+p build_version
