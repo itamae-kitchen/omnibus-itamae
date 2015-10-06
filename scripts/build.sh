@@ -23,3 +23,10 @@ for dist in trusty; do
 done
 
 aws s3 sync static s3://packages.itamae.kitchen/ --grants 'read=uri=http://acs.amazonaws.com/groups/global/AllUsers'
+
+# purge cache
+curl -X DELETE "https://api.cloudflare.com/client/v4/zones/60592b2ad238b2c52c5d2b53b26c7c7a/purge_cache" \
+    -H "X-Auth-Email: ${CF_EMAIL}" \
+    -H "X-Auth-Key: ${CF_AUTH_KEY}" \
+    -H "Content-Type: application/json" \
+    --data '{"purge_everything":true}'
