@@ -16,7 +16,12 @@ Supported distributions:
 
 How to install:
 
-https://packagecloud.io/ryotarai/itamae/install
+```
+$ echo 'deb http://packages.itamae.kitchen/deb/ trusty contrib' | sudo tee /etc/apt/sources.list.d/itamae.list
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E6506E2E
+$ sudo apt-get update
+$ sudo apt-get install itamae
+```
 
 Installation
 ------------
