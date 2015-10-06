@@ -9,7 +9,6 @@ for dist in trusty; do
     docker build -t omnibus-itamae-builder:$dist -f dockerfiles/$dist .
     docker run --rm -v $(pwd):/work -it omnibus-itamae-builder:$dist /bin/bash -c "
         cd /work && \
-        gpg --import tmp/E6506E2E.key && \
         bundle exec omnibus build itamae
     "
 
