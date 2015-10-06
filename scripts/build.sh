@@ -23,5 +23,6 @@ for dist in trusty; do
 
         rm $f
     done
+    cd ..
 done
 
