@@ -1,6 +1,8 @@
 itamae Omnibus project
 ======================
 
+[ ![Download](https://api.bintray.com/packages/itamae/itamae/itamae/images/download.svg) ](https://bintray.com/itamae/itamae/itamae/_latestVersion)
+
 This project creates full-stack platform-specific packages for
 `itamae`!
 
@@ -15,8 +17,8 @@ Supported distributions:
 How to install:
 
 ```
-$ echo 'deb http://packages.itamae.kitchen/deb/ trusty contrib' | sudo tee /etc/apt/sources.list.d/itamae.list
-$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E6506E2E
+$ echo 'deb https://dl.bintray.com/itamae/itamae trusty contrib' | sudo tee /etc/apt/sources.list.d/itamae.list
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv D401AB61
 $ sudo apt-get update
 $ sudo apt-get install itamae
 ```
