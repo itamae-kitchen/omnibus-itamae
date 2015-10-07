@@ -1,0 +1,73 @@
+#!/usr/bin/env ruby
+
+require 'httpclient'
+require 'fileutils'
+
+DISTS = %w!trusty centos7!
+
+$http = HTTPClient.new
+
+def run(*args)
+  unless system(*args)
+    puts "#{args} failed."
+  end
+end
+
+def bintray(uri, path)
+  run("curl", "-v", "-T", path, "-u#{ENV['BINTRAY_USERNAME']}:#{ENV['BINTRAY_API_KEY']}", uri)
+end
+
+def build(dist)
+  code = <<-EOC
+    cd /work && \
+    bundle exec omnibus build itamae
+  EOC
+
+  run "docker", "build", "-t", "omnibus-itamae-builder:#{dist}", "-f", "dockerfiles/#{dist}", "."
+  run "docker", "run", "--rm", "-v", "#{File.expand_path('..', __dir__)}:/work", "-it", "omnibus-itamae-builder:#{dist}", "/bin/bash", "-c", code
+end
+
+def release(dist)
+  Dir['pkg/*.deb'].each do |f|
+    release_deb(f, dist)
+  end
+
+  Dir['pkg/*.rpm'].each do |f|
+    release_rpm(f, dist)
+  end
+end
+
+def release_deb(path, dist)
+  basename = File.basename(path)
+  match = basename.match(/\A([^_]+)_([^_]+)_([^\.]+).deb\z/)
+  name = match[1]
+  version = match[2]
+  arch = match[3]
+
+  uri = "https://api.bintray.com/content/itamae/itamae/itamae/#{version}/pool/contrib/#{name[0]}/#{basename};deb_distribution=#{dist};deb_component=contrib;deb_architecture=#{arch};publish=1"
+  bintray(uri, path)
+
+  FileUtils.mv(path, "#{path}.done")
+end
+
+def release_rpm(path, dist)
+  basename = File.basename(path)
+  match = basename.match(/\A([^-]+)-([\d\.]+-\d+)/)
+  version = match[2]
+
+  uri = "https://api.bintray.com/content/itamae/itamae-rpm/itamae/#{version}/#{basename};publish=1"
+  bintray(uri, path)
+
+  FileUtils.mv(path, "#{path}.done")
+end
+
+dists = ARGV
+dists = DISTS if dists.first == 'all'
+
+Dir.chdir(File.expand_path('..', __dir__)) do
+  dists.each do |dist|
+    build(dist)
+    release(dist)
+  end
+end
+
