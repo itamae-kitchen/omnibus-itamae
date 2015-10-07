@@ -1,8 +1,6 @@
 itamae Omnibus project
 ======================
 
-[ ![Download](https://api.bintray.com/packages/itamae/itamae/itamae/images/download.svg) ](https://bintray.com/itamae/itamae/itamae/_latestVersion)
-
 This project creates full-stack platform-specific packages for
 `itamae`!
 
@@ -10,6 +8,8 @@ Pre-built Packages
 ------------------
 
 ### Ubuntu 14.04 (trusty)
+
+[ ![Download](https://api.bintray.com/packages/itamae/itamae/itamae/images/download.svg) ](https://bintray.com/itamae/itamae/itamae/_latestVersion)
 
 ```
 $ echo 'deb https://dl.bintray.com/itamae/itamae trusty contrib' | sudo tee /etc/apt/sources.list.d/itamae.list
@@ -19,6 +19,8 @@ $ sudo apt-get install itamae
 ```
 
 ### CentOS 7
+
+[ ![Download](https://api.bintray.com/packages/itamae/itamae-rpm/itamae/images/download.svg) ](https://bintray.com/itamae/itamae-rpm/itamae/_latestVersion)
 
 ```
 $ wget https://bintray.com/itamae/itamae-rpm/rpm -O bintray-itamae-itamae-rpm.repo
