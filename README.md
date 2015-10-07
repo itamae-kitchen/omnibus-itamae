@@ -14,13 +14,20 @@ Supported distributions:
 - Ubuntu 14.04
 - (If you would like to use other distributions, please build omnibus-itamae manually by the following steps.)
 
-How to install:
+### Ubuntu 14.04 (trusty)
 
 ```
 $ echo 'deb https://dl.bintray.com/itamae/itamae trusty contrib' | sudo tee /etc/apt/sources.list.d/itamae.list
 $ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv D401AB61
 $ sudo apt-get update
 $ sudo apt-get install itamae
+```
+
+### CentOS 7
+
+```
+$ wget https://bintray.com/itamae/itamae-rpm/rpm -O bintray-itamae-itamae-rpm.repo
+$ sudo mv bintray-itamae-itamae-rpm.repo /etc/yum.repos.d/
 ```
 
 Installation
