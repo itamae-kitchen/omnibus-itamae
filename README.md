@@ -9,11 +9,6 @@ This project creates full-stack platform-specific packages for
 Pre-built Packages
 ------------------
 
-Supported distributions:
-
-- Ubuntu 14.04
-- (If you would like to use other distributions, please build omnibus-itamae manually by the following steps.)
-
 ### Ubuntu 14.04 (trusty)
 
 ```
