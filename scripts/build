@@ -39,7 +39,7 @@ end
 
 def release_deb(path, dist)
   basename = File.basename(path)
-  match = basename.match(/\A([^_]+)_([^_]+)_([^\.]+).deb\z/)
+  match = basename.match(/\A([^_]+)_([^_]+)_([^\.]+)\.deb\z/)
   name = match[1]
   version = match[2]
   arch = match[3]
@@ -52,7 +52,7 @@ end
 
 def release_rpm(path, dist)
   basename = File.basename(path)
-  match = basename.match(/\A([^-]+)-([\d\.]+-\d+)/)
+  match = basename.match(/\A([^-]+)-(.+)\.[^\.]+\.rpm\z/)
   version = match[2]
 
   uri = "https://api.bintray.com/content/itamae/itamae-rpm/itamae/#{version}/#{basename};publish=1"
