@@ -14,7 +14,7 @@ dependency "preparation"
 # itamae dependencies/components
 dependency 'itamae'
 dependency 'specinfra-ec2_metadata-tags'
-override 'ruby', version: '2.1.5'
+override 'ruby', version: '2.3.0'
 
 # version manifest file
 dependency 'version-manifest'

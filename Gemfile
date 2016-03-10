@@ -10,7 +10,7 @@ gem 'omnibus', github: 'chef/omnibus'
 # Use Chef's software definitions. It is recommended that you write your own
 # software definitions, but you can clone/fork Chef's to get you started.
 #gem 'omnibus-software', github: 'opscode/omnibus-software'
-gem 'omnibus-software', github: 'ryotarai/omnibus-software', branch: 'update-cacerts'
+gem 'omnibus-software', github: 'opscode/omnibus-software'
 
 # Use Test Kitchen with Vagrant for converging the build environment
 gem 'test-kitchen',    '~> 1.2'
