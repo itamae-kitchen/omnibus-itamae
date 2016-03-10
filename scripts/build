@@ -3,7 +3,7 @@
 require 'httpclient'
 require 'fileutils'
 
-DISTS = %w!trusty centos7!
+DISTS = %w!trusty xenial centos7!
 
 $http = HTTPClient.new
 
@@ -43,6 +43,8 @@ def release_deb(path, dist)
   name = match[1]
   version = match[2]
   arch = match[3]
+
+  basename.sub!(/\.deb\z/, "_#{dist}.deb")
 
   uri = "https://api.bintray.com/content/itamae/itamae/itamae/#{version}/pool/contrib/#{name[0]}/#{basename};deb_distribution=#{dist};deb_component=contrib;deb_architecture=#{arch};publish=1"
   bintray(uri, path)

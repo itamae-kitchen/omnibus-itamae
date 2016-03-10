@@ -1,0 +1,6 @@
+FROM ryotarai/omnibus:xenial
+RUN git config --global user.email "ryota.arai+itamae@gmail.com" && git config --global user.name "Itamae Builder"
+ADD Gemfile /tmp/Gemfile
+ADD Gemfile.lock /tmp/Gemfile.lock
+WORKDIR /tmp
+RUN bundle install -j4
