@@ -10,6 +10,7 @@ $http = HTTPClient.new
 def run(*args)
   unless system(*args)
     puts "#{args} failed."
+    abort
   end
 end
 
