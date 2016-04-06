@@ -20,12 +20,13 @@ end
 
 def build(dist)
   code = <<-EOC
+    git config --global user.email "ryota.arai+itamae@gmail.com" && git config --global user.name "Itamae Builder" && \
     cd /work && \
+    bundle install -j4 &&
     bundle exec omnibus build itamae
   EOC
 
-  run "docker", "build", "-t", "omnibus-itamae-builder:#{dist}", "-f", "dockerfiles/#{dist}", "."
-  run "docker", "run", "--rm", "-v", "#{File.expand_path('..', __dir__)}:/work", "-it", "omnibus-itamae-builder:#{dist}", "/bin/bash", "-c", code
+  run "docker", "run", "--rm", "-v", "#{File.expand_path('..', __dir__)}:/work", "-it", "ryotarai/omnibus:#{dist}", "/bin/bash", "-c", code
 end
 
 def release(dist)
