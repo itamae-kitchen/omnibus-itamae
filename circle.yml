@@ -1,9 +1,11 @@
 machine:
+  ruby:
+    version: 2.3.0
   services:
     - docker
 dependencies:
   override:
-    - echo nothing
+    - cd scripts && bundle install
 test:
   override:
-    - ./scripts/build
+    - cd scripts && bundle exec ruby ./build
