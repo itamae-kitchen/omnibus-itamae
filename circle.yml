@@ -1,6 +1,9 @@
 machine:
   services:
     - docker
+dependencies:
+  override:
+    - echo nothing
 test:
   override:
     - ./scripts/build
