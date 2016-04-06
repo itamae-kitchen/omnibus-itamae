@@ -8,4 +8,4 @@ dependencies:
     - cd scripts && bundle install
 test:
   override:
-    - cd scripts && bundle exec ruby ./build
+    - cd scripts && bundle exec ruby ./build trusty
