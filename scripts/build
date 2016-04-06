@@ -47,7 +47,7 @@ def release_deb(path, dist)
 
   basename.sub!(/\.deb\z/, "_#{dist}.deb")
 
-  uri = "https://api.bintray.com/content/itamae/itamae/itamae/#{version}/pool/contrib/#{name[0]}/#{basename};deb_distribution=#{dist};deb_component=contrib;deb_architecture=#{arch};publish=1"
+  uri = "https://api.bintray.com/content/itamae/itamae/itamae/#{version}/pool/contrib/#{name[0]}/#{basename};deb_distribution=#{dist};deb_component=contrib;deb_architecture=#{arch}"
   bintray(uri, path)
 
   FileUtils.mv(path, "#{path}.done")
