@@ -8,7 +8,6 @@ pkg/*
 bin/*
 files/**/cache/
 vendor/cookbooks
-/Gemfile.lock
 /_*
 /tmp
 /static/deb/db
