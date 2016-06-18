@@ -1,11 +1,7 @@
 #!/usr/bin/env ruby
-
-require 'httpclient'
 require 'fileutils'
 
 DISTS = %w!trusty xenial centos7!
-
-$http = HTTPClient.new
 
 def run(*args)
   unless system(*args)
