@@ -14,14 +14,24 @@ def bintray(uri, path)
   run("curl", "-v", "-T", path, "-u#{ENV['BINTRAY_USERNAME']}:#{ENV['BINTRAY_API_KEY']}", uri)
 end
 
+def docker(*args)
+  if ENV["DOCKER_WITH_SUDO"]
+    args = ["sudo", "docker"] + args
+  else
+    args = ["docker"] + args
+  end
+
+  run(*args)
+end
+
 def build(dist)
   code = <<-EOC
     cd /work && \
     bundle exec omnibus build itamae
   EOC
 
-  run "docker", "build", "-t", "omnibus-itamae-builder:#{dist}", "-f", "dockerfiles/#{dist}", "."
-  run "docker", "run", "--rm", "-v", "#{File.expand_path('..', __dir__)}:/work", "-it", "omnibus-itamae-builder:#{dist}", "/bin/bash", "-c", code
+  docker "build", "-t", "omnibus-itamae-builder:#{dist}", "-f", "dockerfiles/#{dist}", "."
+  docker "run", "--rm", "-v", "#{File.expand_path('..', __dir__)}:/work", "-it", "omnibus-itamae-builder:#{dist}", "/bin/bash", "-c", code
 end
 
 def release(dist)
