@@ -31,7 +31,7 @@ def build(dist)
   EOC
 
   docker "build", "-t", "omnibus-itamae-builder:#{dist}", "-f", "dockerfiles/#{dist}", "."
-  docker "run", "--rm", "-v", "#{File.expand_path('..', __dir__)}:/work", "-it", "omnibus-itamae-builder:#{dist}", "/bin/bash", "-c", code
+  docker "run", "--rm", "-v", "#{File.expand_path('..', __dir__)}:/work", "omnibus-itamae-builder:#{dist}", "/bin/bash", "-c", code
 end
 
 def release(dist)
