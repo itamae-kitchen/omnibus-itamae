@@ -27,7 +27,7 @@ end
 def build(dist)
   code = <<-EOC
     cd /work && \
-    bundle exec omnibus build itamae
+    /opt/chefdk/embedded/bin/bundle exec omnibus build itamae
   EOC
 
   docker "build", "-t", "omnibus-itamae-builder:#{dist}", "-f", "dockerfiles/#{dist}", "."

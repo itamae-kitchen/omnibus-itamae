@@ -1,6 +1,11 @@
-FROM ryotarai/omnibus:xenial
-RUN git config --global user.email "ryota.arai+itamae@gmail.com" && git config --global user.name "Itamae Builder"
+FROM ubuntu:16.04
+RUN apt-get update && \
+  apt-get -y install curl git build-essential && \
+  curl -L -o /tmp/chefdk.deb https://packages.chef.io/stable/ubuntu/12.04/chefdk_0.14.25-1_amd64.deb && \
+  dpkg -i /tmp/chefdk.deb && \
+  git config --global user.email "ryota.arai+itamae@gmail.com" && \
+  git config --global user.name "Itamae Builder"
 ADD Gemfile /tmp/Gemfile
 ADD Gemfile.lock /tmp/Gemfile.lock
 WORKDIR /tmp
-RUN bundle install -j4
+RUN /opt/chefdk/embedded/bin/bundle install -j4

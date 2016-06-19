@@ -1,7 +1,12 @@
-FROM ryotarai/omnibus:centos7
-RUN git config --global user.email "ryota.arai+itamae@gmail.com" && git config --global user.name "Itamae Builder"
+FROM centos:7
+
+RUN curl -L -o /tmp/chefdk.rpm https://packages.chef.io/stable/el/7/chefdk-0.14.25-1.el7.x86_64.rpm && \
+  rpm -i /tmp/chefdk.rpm && \
+  yum install -y epel-release patch rpm-build git gcc make && \
+  yum install -y fakeroot && \
+  git config --global user.email "ryota.arai+itamae@gmail.com" && \
+  git config --global user.name "Itamae Builder"
 ADD Gemfile /tmp/Gemfile
 ADD Gemfile.lock /tmp/Gemfile.lock
 WORKDIR /tmp
-RUN bundle install -j4
-RUN yum makecache fast && yum install -y epel-release && yum install -y patch fakeroot rpm-build
+RUN /opt/chefdk/embedded/bin/bundle install -j4
