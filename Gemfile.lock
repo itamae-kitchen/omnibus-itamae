@@ -14,8 +14,9 @@ GIT
       thor (~> 0.18)
 
 GIT
-  remote: git://github.com/opscode/omnibus-software.git
-  revision: 931d8a331bd8397729735867d394560c151dcca9
+  remote: git://github.com/ryotarai/omnibus-software.git
+  revision: 4230b20cc4c3460ae4630d044b689f4b93750e6e
+  branch: for-itamae
   specs:
     omnibus-software (4.0.0)
       omnibus (>= 5.2.0)
@@ -24,13 +25,13 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.8)
-    artifactory (2.3.2)
-    aws-sdk (2.3.14)
-      aws-sdk-resources (= 2.3.14)
-    aws-sdk-core (2.3.14)
+    artifactory (2.3.3)
+    aws-sdk (2.3.17)
+      aws-sdk-resources (= 2.3.17)
+    aws-sdk-core (2.3.17)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.3.14)
-      aws-sdk-core (= 2.3.14)
+    aws-sdk-resources (2.3.17)
+      aws-sdk-core (= 2.3.17)
     berkshelf (3.3.0)
       addressable (~> 2.3.4)
       berkshelf-api-client (~> 1.2)
@@ -97,7 +98,7 @@ GEM
       mixlib-log
     mixlib-cli (1.6.0)
     mixlib-config (2.2.1)
-    mixlib-install (1.0.13)
+    mixlib-install (1.1.0)
       artifactory
       mixlib-shellout
       mixlib-versioning
@@ -107,11 +108,11 @@ GEM
     multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (3.1.1)
+    net-ssh (3.2.0)
     nio4r (1.2.1)
     octokit (3.8.0)
       sawyer (~> 0.6.0, >= 0.5.3)
-    ohai (8.16.0)
+    ohai (8.17.0)
       chef-config (>= 12.5.0.alpha.1, < 13)
       ffi (~> 1.9)
       ffi-yajl (~> 2.2)
@@ -153,7 +154,7 @@ GEM
       dep_selector (~> 1.0)
       semverse (~> 1.1)
     systemu (2.6.5)
-    test-kitchen (1.10.0)
+    test-kitchen (1.10.2)
       mixlib-install (~> 1.0, >= 1.0.4)
       mixlib-shellout (>= 1.2, < 3.0)
       net-scp (~> 1.1)
@@ -179,4 +180,4 @@ DEPENDENCIES
   test-kitchen (~> 1.2)
 
 BUNDLED WITH
-   1.12.1
+   1.12.4
