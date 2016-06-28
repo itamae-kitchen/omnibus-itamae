@@ -5,7 +5,7 @@ RUN apt-get update && \
   dpkg -i /tmp/chefdk.deb && \
   git config --global user.email "ryota.arai+itamae@gmail.com" && \
   git config --global user.name "Itamae Builder"
-ADD Gemfile /tmp/Gemfile
-ADD Gemfile.lock /tmp/Gemfile.lock
-WORKDIR /tmp
-RUN /opt/chefdk/embedded/bin/bundle install -j4
+ADD . /work
+WORKDIR /work
+RUN rm -rf .bundle && \
+  /opt/chefdk/embedded/bin/bundle install -j4

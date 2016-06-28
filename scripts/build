@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 require 'fileutils'
+require 'shellwords'
 
 DISTS = %w!trusty xenial centos7!
 
 def run(*args)
+  puts "> #{args}"
   unless system(*args)
     puts "#{args} failed."
     abort
@@ -14,24 +16,20 @@ def bintray(uri, path)
   run("curl", "-v", "-T", path, "-u#{ENV['BINTRAY_USERNAME']}:#{ENV['BINTRAY_API_KEY']}", uri)
 end
 
-def docker(*args)
+def sudo(arg)
   if ENV["DOCKER_WITH_SUDO"]
-    args = ["sudo", "docker"] + args
-  else
-    args = ["docker"] + args
+    arg = "sudo #{arg}"
   end
 
-  run(*args)
+  arg
 end
 
 def build(dist)
-  code = <<-EOC
-    cd /work && \
-    /opt/chefdk/embedded/bin/bundle exec omnibus build itamae
-  EOC
+  run(sudo("docker build -t omnibus-itamae-builder:#{dist} -f dockerfiles/#{dist} ."))
+  run(sudo("docker run --rm --add-host=pyyaml.org:70.87.222.22 -v #{"#{File.join(Dir.pwd, 'pkg')}:/work/pkg".shellescape} omnibus-itamae-builder:#{dist} /opt/chefdk/embedded/bin/bundle exec omnibus build itamae"))
 
-  docker "build", "-t", "omnibus-itamae-builder:#{dist}", "-f", "dockerfiles/#{dist}", "."
-  docker "run", "--rm", "-v", "#{File.expand_path('..', __dir__)}:/work", "omnibus-itamae-builder:#{dist}", "/bin/bash", "-c", code
+  user = `id -u -n`.chomp
+  run(sudo("chown -R #{user}:#{user} pkg"))
 end
 
 def release(dist)

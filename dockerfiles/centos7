@@ -6,7 +6,7 @@ RUN curl -L -o /tmp/chefdk.rpm https://packages.chef.io/stable/el/7/chefdk-0.14.
   yum install -y fakeroot && \
   git config --global user.email "ryota.arai+itamae@gmail.com" && \
   git config --global user.name "Itamae Builder"
-ADD Gemfile /tmp/Gemfile
-ADD Gemfile.lock /tmp/Gemfile.lock
-WORKDIR /tmp
-RUN /opt/chefdk/embedded/bin/bundle install -j4
+ADD . /work
+WORKDIR /work
+RUN rm -rf .bundle && \
+  /opt/chefdk/embedded/bin/bundle install -j4
