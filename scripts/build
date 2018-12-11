@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 require 'shellwords'
+require 'uri'
+require 'net/http'
 
-DISTS = %w!trusty xenial centos7!
+DISTS = %w!trusty xenial bionic stretch centos7!
 
 def run(*args)
   puts "> #{args}"
@@ -12,13 +14,28 @@ def run(*args)
   end
 end
 
-def bintray(uri, path)
-  run("curl", "-v", "-T", path, "-u#{ENV['BINTRAY_USERNAME']}:#{ENV['BINTRAY_API_KEY']}", uri)
+def bintray(url, path)
+  http = Net::HTTP.new(url.host, url.port)
+  http.use_ssl = url.scheme == 'https'
+  http.start do
+    print "* #{path} => #{url.path} ... "
+    File.open(path, 'r') do |io|
+      req = Net::HTTP::Put.new(url)
+      req.basic_auth(ENV.fetch('BINTRAY_USERNAME'), ENV.fetch('BINTRAY_API_KEY'))
+
+      req['Content-Type'] = 'application/vnd.debian.binary-package'
+      #req['X-GPG-PASSPHRASE'] = config['bintray_gpg_key_passphrase']
+      req['Transfer-Encoding'] = 'chunked'
+      req.body_stream = io
+      http.request(req)
+    end
+    puts "done"
+  end
 end
 
 def sudo(arg)
   if ENV["DOCKER_WITH_SUDO"]
-    arg = "sudo #{arg}"
+    arg = arg.is_a?(Array) ? ['sudo', *arg] : "sudo #{arg}"
   end
 
   arg
@@ -26,10 +43,9 @@ end
 
 def build(dist)
   run(sudo("docker build -t omnibus-itamae-builder:#{dist} -f dockerfiles/#{dist} ."))
-  run(sudo("docker run --rm --add-host=pyyaml.org:70.87.222.22 -v #{"#{File.join(Dir.pwd, 'pkg')}:/work/pkg".shellescape} omnibus-itamae-builder:#{dist} /opt/chefdk/embedded/bin/bundle exec omnibus build itamae"))
 
-  user = `id -u -n`.chomp
-  run(sudo("chown -R #{user}:#{user} pkg"))
+  user = `id -u`.chomp
+  run(*sudo([*%w(docker run --rm -v), "#{File.join(Dir.pwd, 'pkg')}:/work/pkg", "omnibus-itamae-builder:#{dist}", 'bash', '-xe', '-c', "bundle exec omnibus build itamae && chown -R #{user}:#{user} /work/pkg"]))
 end
 
 def release(dist)
@@ -51,8 +67,16 @@ def release_deb(path, dist)
 
   basename.sub!(/\.deb\z/, "_#{dist}.deb")
 
-  uri = "https://api.bintray.com/content/itamae/itamae/itamae/#{version}/pool/contrib/#{name[0]}/#{basename};deb_distribution=#{dist};deb_component=contrib;deb_architecture=#{arch};publish=1"
-  bintray(uri, path)
+  url = URI("https://api.bintray.com/content/itamae/itamae/" \
+            "#{URI.encode_www_form_component(name)}/" \
+            "#{URI.encode_www_form_component(version)}/" \
+            "#{URI.encode_www_form_component(dist)}/pool/contrib/#{name[0]}/#{URI.encode_www_form_component(basename)};" \
+            "deb_distribution=#{URI.encode_www_form_component(dist)};" \
+            "deb_architecture=#{URI.encode_www_form_component(arch)};" \
+            "deb_component=contrib;" \
+            "publish=1")
+
+  bintray(url, path)
 
   FileUtils.mv(path, "#{path}.done")
 end
@@ -62,8 +86,13 @@ def release_rpm(path, dist)
   match = basename.match(/\A([^-]+)-(.+)\.[^\.]+\.rpm\z/)
   version = match[2]
 
-  uri = "https://api.bintray.com/content/itamae/itamae-rpm/itamae/#{version}/#{basename};publish=1"
-  bintray(uri, path)
+  url = URI("https://api.bintray.com/content/itamae/itamae-rpm/" \
+            "itamae/" \
+            "#{URI.encode_www_form_component(version)}/" \
+            "#{URI.encode_www_form_component(basename)};" \
+            "publish=1")
+
+  bintray(url, path)
 
   FileUtils.mv(path, "#{path}.done")
 end

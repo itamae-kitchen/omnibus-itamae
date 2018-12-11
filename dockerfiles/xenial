@@ -1,11 +1,14 @@
 FROM ubuntu:16.04
 RUN apt-get update && \
-  apt-get -y install curl git build-essential && \
-  curl -L -o /tmp/chefdk.deb https://packages.chef.io/stable/ubuntu/12.04/chefdk_0.14.25-1_amd64.deb && \
-  dpkg -i /tmp/chefdk.deb && \
-  git config --global user.email "ryota.arai+itamae@gmail.com" && \
+  apt-get -y install curl git build-essential apt-transport-https
+
+RUN curl -L 'https://sorah.jp/packaging/debian/3F0F56A8.pub.txt' | apt-key add -
+RUN echo "deb [arch=amd64] https://cache.ruby-lang.org/lab/sorah/deb/ stretch main" > /etc/apt/sources.list.d/sorah-ruby.list
+RUN apt-get update && apt-get -y install ruby-dev ruby-bundler
+
+RUN git config --global user.email "ryota.arai+itamae@gmail.com" && \
   git config --global user.name "Itamae Builder"
-ADD . /work
+ADD Gemfile* /work/
 WORKDIR /work
-RUN rm -rf .bundle && \
-  /opt/chefdk/embedded/bin/bundle install -j4
+RUN bundle install -j4 --path /bundle
+ADD . /work/
