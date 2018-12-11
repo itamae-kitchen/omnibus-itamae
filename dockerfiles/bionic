@@ -3,7 +3,7 @@ RUN apt-get update && \
   apt-get -y install curl git build-essential apt-transport-https
 
 RUN curl -L 'https://sorah.jp/packaging/debian/3F0F56A8.pub.txt' | apt-key add -
-RUN echo "deb [arch=amd64] https://cache.ruby-lang.org/lab/sorah/deb/ stretch main" > /etc/apt/sources.list.d/sorah-ruby.list
+RUN echo "deb [arch=amd64] https://cache.ruby-lang.org/lab/sorah/deb/ bionic main" > /etc/apt/sources.list.d/sorah-ruby.list
 RUN apt-get update && apt-get -y install ruby-dev ruby-bundler
 
 RUN git config --global user.email "ryota.arai+itamae@gmail.com" && \
