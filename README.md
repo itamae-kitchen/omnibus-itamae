@@ -7,7 +7,7 @@ This project creates full-stack platform-specific packages for
 Pre-built Packages
 ------------------
 
-### Ubuntu 14.04 (trusty)
+### Ubuntu
 
 [ ![Download](https://api.bintray.com/packages/itamae/itamae/itamae/images/download.svg) ](https://bintray.com/itamae/itamae/itamae/_latestVersion)
 
@@ -38,6 +38,21 @@ $ bundle install --binstubs
 
 Usage
 -----
+
+### Quick with Docker
+
+Use `./scripts/build`
+
+```
+$ ./scripts/build all
+```
+
+or only perform build on specific distro:
+
+```
+$ ./scripts/build bionic
+```
+
 ### Build
 
 You create a platform-specific package using the `build project` command:
