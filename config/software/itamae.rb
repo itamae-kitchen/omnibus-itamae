@@ -9,5 +9,5 @@ env = {
 }
 
 build do
-  gem "install itamae --no-ri --no-rdoc -v #{version}", env: env
+  gem "install itamae --no-doc -v #{version}", env: env
 end

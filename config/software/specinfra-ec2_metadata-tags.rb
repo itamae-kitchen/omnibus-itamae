@@ -9,5 +9,5 @@ env = {
 }
 
 build do
-  gem "install specinfra-ec2_metadata-tags --no-ri --no-rdoc -v #{version}", env: env
+  gem "install specinfra-ec2_metadata-tags --no-doc -v #{version}", env: env
 end
