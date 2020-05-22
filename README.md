@@ -7,16 +7,9 @@ This project creates full-stack platform-specific packages for
 Pre-built Packages
 ------------------
 
-### Ubuntu
+### Debian/Ubuntu
 
-[ ![Download](https://api.bintray.com/packages/itamae/itamae/itamae/images/download.svg) ](https://bintray.com/itamae/itamae/itamae/_latestVersion)
-
-```
-$ echo 'deb https://dl.bintray.com/itamae/itamae trusty contrib' | sudo tee /etc/apt/sources.list.d/itamae.list
-$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv D401AB61
-$ sudo apt-get update
-$ sudo apt-get install itamae
-```
+Moved to [itamae-kitchen/itamae-package](https://github.com/itamae-kitchen/itamae-package)
 
 ### CentOS 7
 

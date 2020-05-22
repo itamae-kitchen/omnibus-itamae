@@ -4,7 +4,7 @@ require 'shellwords'
 require 'uri'
 require 'net/http'
 
-DISTS = %w!xenial bionic focal stretch buster centos7!
+DISTS = %w!centos7!
 
 def run(*args)
   puts "> #{args}"
